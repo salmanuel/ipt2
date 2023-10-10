@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\HeroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Route::get('/verification/{user}/{token}', [AuthController::class, 'verification
 Route::post('/dashboard', [AuthController::class, 'login']);
 Route::get('/dashboard', [AuthController::class, 'dashboard']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::resource('heroes', HeroController::class);
 
 // Route::get('/sendmail', [EmailController::class, 'sendEmail']);
 
