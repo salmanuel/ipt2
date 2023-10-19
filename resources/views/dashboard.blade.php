@@ -2,24 +2,45 @@
 
 @section('content')
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">IPT Security System</a>
+    
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav ml-auto">
-                <div class="mt-2">Dashboard</div>
-
-                <form action="{{ url('/logout') }}" method="POST">
-                    {{ csrf_field() }}
-
-                    <button type="submit" class="btn btn-link nav-link">Logout</button>
-                </form>
-
+    <div class="container">
+        <h1>Fruits List</h1>
+        <a href="{{ route('fruits.create') }}" class="btn btn-primary mb-3">Add New Fruit</a>
+    
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-        </div>
-    </nav>
-
-    <div class="container mt-4">
-        <p>Hi</p>
+        @endif
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Classification</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($fruits as $fruit)
+                    <tr>
+                        <td>{{ $fruit->fruit_name }}</td>
+                        <td>{{ $fruit->description }}</td>
+                        <td>{{ $fruit->classification }}</td>
+                        <td>
+                            {{-- <a href="{{ route('fruits.show', $fruit->id) }}" class="btn btn-info">View</a> --}}
+                            <a href="{{ route('fruits.edit', $fruit->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('fruits.destroy', $fruit->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection

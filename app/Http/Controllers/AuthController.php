@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             if (Auth::user()->email_verified_at) {
-                return view('heroes.index');
+                return view('dashboard');
             } else {
                 Auth::logout();
                 return redirect()->route('loginForm')->with('error', 'Email not verified. Please check your email for verification instructions.');
