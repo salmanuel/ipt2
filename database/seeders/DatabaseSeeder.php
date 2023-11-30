@@ -18,5 +18,24 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Administrator',
+            'email' => 'admin@email.com',
+            'password' => bcrypt('password123'),
+            'email_verified_at' => now()
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Cashier',
+            'email' => 'viewer@email.com',
+            'password' => bcrypt('password123'),
+            'email_verified_at' => now()
+        ]);
+
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+            FruitSeeder::class,
+
+        ]);
     }
 }

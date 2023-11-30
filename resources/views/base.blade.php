@@ -12,15 +12,20 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Midterm</a>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse flex justify-end" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 @if (auth()->check())
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
                 </li>
+                {{-- @php
+                    $user = auth()->user();
+                @endphp --}}
+                @role('admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/logs') }}">Logs</a>
                 </li>
+                @endrole
 
                 <form action="{{ url('/logout') }}" method="POST">
                     {{ csrf_field() }}

@@ -28,14 +28,22 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // Route::resource('heroes', HeroController::class);
-Route::get('dashboard', [FruitController::class, 'index'])->name('dashboard');
-Route::get('/fruits/add', [FruitController::class, 'create'])->name('fruits.create');
-Route::post('/fruits', [FruitController::class, 'store'])->name('fruits.store');
-Route::get('/fruits/{fruit}/edit', [FruitController::class, 'edit'])->name('fruits.edit');
-Route::patch('/fruits/{fruit}', [FruitController::class, 'update'])->name('fruits.update');
-Route::delete('/fruits/{fruit}', [FruitController::class, 'destroy'])->name('fruits.destroy');
+Route::middleware('role:admin|viewer')->group(function(){
+    Route::get('dashboard', [FruitController::class, 'index'])->name('dashboard');
 
-Route::get('/logs', [LogController::class, 'index'])->name('logs');
+});
+
+Route::middleware('role:admin')->group(function(){
+
+    Route::get('/fruits/add', [FruitController::class, 'create'])->name('fruits.create');
+    Route::post('/fruits', [FruitController::class, 'store'])->name('fruits.store');
+    Route::get('/fruits/{fruit}/edit', [FruitController::class, 'edit'])->name('fruits.edit');
+    Route::patch('/fruits/{fruit}', [FruitController::class, 'update'])->name('fruits.update');
+    Route::delete('/fruits/{fruit}', [FruitController::class, 'destroy'])->name('fruits.destroy');
+
+    Route::get('/logs', [LogController::class, 'index'])->name('logs');
+});
+
 
 
 // Route::get('/sendmail', [EmailController::class, 'sendEmail']);
