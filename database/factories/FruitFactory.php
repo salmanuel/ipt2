@@ -17,9 +17,10 @@ class FruitFactory extends Factory
     public function definition(): array
     {
         return [
-            'fruit_name' => $this->faker->name,
+            'fruit_name' => $this->faker->firstName,
             'description' => $this->faker->sentence,
-            'classification' => $this->faker->word
+            'classification' => $this->faker->word,
+            'stocks' => rand(1,100)
         ];
     }
 }

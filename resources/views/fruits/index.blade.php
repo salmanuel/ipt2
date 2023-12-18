@@ -18,6 +18,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Classification</th>
+                <th>Stocks</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                     <td>{{ $fruit->fruit_name }}</td>
                     <td>{{ $fruit->description }}</td>
                     <td>{{ $fruit->classification }}</td>
+                    <td>{{ $fruit->stocks }}</td>
                     <td>
                         <a href="{{ route('fruits.show', $fruit->id) }}" class="btn btn-info">View</a>
                         <a href="{{ route('fruits.edit', $fruit->id) }}" class="btn btn-warning">Edit</a>

@@ -9,11 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Midterm</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="ms-2">
+            <a class="navbar-brand" href="#">Finals</a>
+        </div>
 
-        <div class="collapse navbar-collapse flex justify-end" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto text-dark">
                 @if (auth()->check())
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
@@ -37,7 +39,11 @@
             </ul>
         </div>
     </nav>
-    @yield('content')
+    <div class="bg-secondary" style="min-height: 100vh">
+        <div >
+            @yield('content')
+        </div>
+    </div>
 </body>
 </html>
 

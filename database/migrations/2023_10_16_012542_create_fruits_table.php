@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('fruit_name');
             $table->string('description');
             $table->string('classification');
+            $table->integer('stocks');
+            $table->boolean('restock')->default(false)->nullable();
             $table->timestamps();
         });
     }

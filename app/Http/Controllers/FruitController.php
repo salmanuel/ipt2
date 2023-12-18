@@ -35,13 +35,14 @@ class FruitController extends Controller
             'fruit_name' => 'required|string',
             'description' => 'required|string',
             'classification' => 'required|string',
+            'stocks' => 'required|numeric'
         ]);
         //
         $fruit = Fruit::create($request->all());
-        $log_entry = "Added an fruit" . $fruit->name . "with the ID#" . $fruit->id ;
+        $log_entry = "Added an fruit " . $fruit->fruit_name . "with" . $fruit->stocks . "stocks" . "with the ID# of " . $fruit->id ;
 
         event(new UserLog($log_entry));
-        return redirect()->route('dashboard')->with('success', 'Fruit added to the list.');
+        return redirect()->route('dashboard')->with('success', "Fruit ". $fruit->fruit_name ." added to the list.");
     }
 
     /**
@@ -66,14 +67,16 @@ class FruitController extends Controller
     public function update(Request $request, Fruit $fruit)
     {
         $request->validate([
-            'fruit_name'    => 'required|string',
-            'description' => 'required|string',
-            'classification'      => 'required|string',
+            'fruit_name'        => 'required|string',
+            'description'       => 'required|string',
+            'classification'    => 'required|string',
+            'stocks'            => 'required|numeric'
+
         ]);
 
         $fruit->update($request->all());
 
-        $log_entry = "Updated fruit " . $fruit->fruit_title . " with the ID#" . $fruit->id;
+        $log_entry = "Updated fruit " . $fruit->fruit_name . " with the ID# of " . $fruit->id;
         event(new UserLog($log_entry));
 
         return redirect()->route('dashboard')->with('success', 'Fruit updated successfully!');
@@ -90,5 +93,14 @@ class FruitController extends Controller
         $fruit->delete();
 
         return redirect()->route('dashboard')->with('success', 'Fruit deleted successfully!');
+    }
+
+    public function restock(Fruit $fruit)
+    {
+        // Perform restocking logic here
+        $fruit->update(['restock' => true]);
+
+        // Redirect back or to a specific route after restocking
+        return redirect()->back()->with('success', 'Restock activated for ' . $fruit->fruit_name);
     }
 }
